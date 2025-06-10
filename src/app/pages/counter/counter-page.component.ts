@@ -1,19 +1,20 @@
-import { Component } from "@angular/core";
-
-
+import { Component, signal } from '@angular/core';
 
 @Component({
-    templateUrl: './counter-page.component.html',
-    styleUrl: './counter-page.component.css',
+  templateUrl: './counter-page.component.html',
+  styleUrl: './counter-page.component.css',
 })
-export class CounterPageComponent{
-    counter = 10;
+export class CounterPageComponent {
+  counter = 10;
+  counterSignal = signal(10);
 
-    increaseBy(value: number){
-        this.counter += value;
-    }
+  increaseBy(value: number) {
+    this.counter += value;
+    this.counterSignal.update((current) => current + value);
+  }
 
-    reset(){
-        this.counter = 10;
-    }
+  reset() {
+    this.counter = 0;
+    this.counterSignal.set(0);
+  }
 }
